@@ -49,7 +49,7 @@ lugarDif' ((p,(x,y)):t)
 
 lugarDif :: [(Peca, Coordenadas)] -> Bool
 lugarDif [] = True
-lugarDif ((p,(x,y)):t) = if coordenadas ((p,(x,y)):t) == True then lugarDif' ((p,(x,y)):t)
+lugarDif ((p,(x,y)):t) = if coordenadas ((p,(x,y)):t) then lugarDif' ((p,(x,y)):t)
                         else False
 
 
