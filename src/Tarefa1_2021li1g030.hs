@@ -17,7 +17,6 @@ validaPotencialMapa [(a,(x,y))] = False
 validaPotencialMapa l = if (lugarDif l && porta l && caixaSegura l && vazio l && chao l) then True else False
 
 --1.
-
 {-|coordenadas : Verifica se as coordenadas de uma lista estão bem definidas, ou seja, maiores do que zero
    lugarDif: Verfica se a função coordenadas é verdade, se sim executa lugarDif'
     lugarDif': Verifica se as Peças de uma lista estão em lugares difrentes
@@ -43,7 +42,7 @@ lugarDif' ((p,(x,y)):t)
 
 lugarDif :: [(Peca, Coordenadas)] -> Bool
 lugarDif [] = True
-lugarDif ((p,(x,y)):t) = if coordenadas ((p,(x,y)):t) == True then lugarDif' ((p,(x,y)):t)
+lugarDif ((p,(x,y)):t) = if coordenadas ((p,(x,y)):t) then lugarDif' ((p,(x,y)):t)
                         else False
 
 
@@ -51,6 +50,7 @@ lugarDif ((p,(x,y)):t) = if coordenadas ((p,(x,y)):t) == True then lugarDif' ((p
 
 {-|porta : verifica se existe, pelo menos, uma porta na lista
     --semPortas : verifica se não existe mais do que uma porta na lista-}
+
 
 porta :: [(Peca, Coordenadas)] -> Bool
 porta [] = False
