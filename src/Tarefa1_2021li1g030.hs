@@ -72,10 +72,10 @@ porta ((p,(x,y)):t) = if p == Porta then semPortas t
 
 --3.
 
---caixaSegura: Corre as funções auxiliares que premitiram saber se não há caixas a flutuar
+--caixaSegura: Corre as funções auxiliares que permitiram saber se não há caixas a flutuar
     --listaCaixas: Cria uma lista (a partir da lista principal) só com as peças que são caixas
     --caixaSeguraM: Compara as coordenadas da 'listaCaixas' com as da lista original
-    --caixaSeguara2: Verifica se na coordenada inferiror a uma caixa existe outra caixa ou bloco 
+    --caixaSegura2: Verifica se na coordenada inferior a uma caixa existe outra caixa ou bloco 
 
 caixaSegura2 :: Coordenadas -> [(Peca, Coordenadas)] -> Bool
 caixaSegura2 _ [] = False
