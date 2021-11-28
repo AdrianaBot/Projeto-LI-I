@@ -23,19 +23,7 @@ instance Show Jogo where
           fazString [h] = h
           fazString (h:t) = h ++ "\n" ++ (fazString t)
          
-{- |
-escrevePeca : Dada uma determinada Peca, representa-a em forma de String
-escreveJogador : Dada as informações de um Jogador, escreve um String correspondente
-introduzPlayerY : Verifica em qual das listas do mapa pertence o jogador
- introduzPlayerX : Depois de descobrir a que lista do mapa a qual o jogador pertence, procura saber qual o elemente dessa lista que lhe corresponde 
-introduzCaixaY : Verifica em qual das listas do mapa pertence o caixa que o jogador segura (isto, se ele segurar uma)
- introduzCaixaX : Depois de descobrir a que lista do mapa a qual a caixa pertence, procura saber qual o elemente dessa lista que lhe corresponde
-escreveLinha : Cria uma String formada pelas strings que corresponde aos elementos do mapa
-cosntroiMapa1 : Cria uma lista com as Strings da função escreveLinha
-constroiJogo : Ponto de entrada da função (executa todas as outras funções a cima, de modo a se obter uma lista de listas de String, sendo que cada
-"sub-lista" dessa lista corresponde a uma linha do eixo das ordenadas aonde se encontram as Peças que compoẽm o mapa)
--}
-
+{- |escrevePeca : Dada uma determinada Peca, representa-a em forma de String-}
 escrevePeca :: Peca -> String
 escrevePeca Vazio = " "
 escrevePeca Bloco = "X"
@@ -43,14 +31,16 @@ escrevePeca Caixa = "C"
 escrevePeca Porta = "P"
 
 
-
+{- |escreveJogador : Dada as informações de um Jogador, escreve um String correspondente-}
 escreveJogador :: Jogador -> String
 escreveJogador (Jogador (x,y) direcao caixa)
  | direcao == Este = ">"
  | otherwise = "<"
 
 
-
+{- |introduzPlayerY : Verifica em qual das listas do mapa pertence o jogador
+    
+    introduzPlayerX : Depois de descobrir a que lista do mapa a qual o jogador pertence, procura saber qual o elemente dessa lista que lhe corresponde-}
 introduzPlayerY :: [String] -> String -> Coordenadas -> [String]
 introduzPlayerY [] _ _ = []
 introduzPlayerY ((h:t):t1) a (x,y)
@@ -64,7 +54,9 @@ introduzPlayerY ((h:t):t1) a (x,y)
         | otherwise = h : introduzPlayerX t a (x - 1)
 
 
+{- |introduzCaixaY : Verifica em qual das listas do mapa pertence o caixa que o jogador segura (isto, se ele segurar uma)
 
+  introduzCaixaX : Depois de descobrir a que lista do mapa a qual a caixa pertence, procura saber qual o elemente dessa lista que lhe corresponde-}
 introduzCaixaY :: [String] -> String -> Coordenadas -> [String]
 introduzCaixaY [] _ _ = []
 introduzCaixaY ((h:t):t1) a (x,y)
@@ -78,19 +70,21 @@ introduzCaixaY ((h:t):t1) a (x,y)
         | otherwise = h : introduzCaixaX t a (x - 1)
 
 
-
+{- |escreveLinha : Cria uma String formada pelas strings que corresponde aos elementos do mapa-}
 escreveLinha :: [Peca] -> String
 escreveLinha [] = []
 escreveLinha (h:t) = escrevePeca h ++ escreveLinha t
 
 
-
+{- |cosntroiMapa1 : Cria uma lista com as Strings da função escreveLinha-}
 constroiMapa1 :: Mapa -> [String]
 constroiMapa1 [] = []
 constroiMapa1 mapa@((h:t):t1) = escreveLinha (h:t) : constroiMapa1 t1
 
 
-
+{- |constroiJogo : Ponto de entrada da função (executa todas as outras funções a cima, de modo a se obter uma lista de listas de String, sendo que cada
+"sub-lista" dessa lista corresponde a uma linha do eixo das ordenadas aonde se encontram as Peças que compoẽm o mapa)
+-}
 constroiJogo :: Jogo -> [String]
 constroiJogo (Jogo [] (Jogador (x,y) direcao caixa)) = []
 constroiJogo (Jogo mapa (Jogador (x,y) direcao caixa)) 
