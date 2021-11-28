@@ -10,6 +10,7 @@ module Tarefa4_2021li1g030 where
 
 import LI12122
 import Tarefa2_2021li1g030
+import Tarefa3_2021li1g030
 import Control.Lens 
 
 
@@ -25,17 +26,15 @@ moveJogador (Jogo mapa jogador) movimento
 {-andarEsquerda é o movimento para a esquerda do jogador, seja ele andar uma unidade ou virar-se-}
 andarEsquerda :: Jogo -> Jogo
 andarEsquerda (Jogo mapa (Jogador (x,y) dir caixa)) 
-    | podeAndar (x-1,y) caixa mapa && caixa = (Jogo (moveObjeto mapa Caixa (x,y-1) (x-1,y-1)) (Jogador (x-1,y) Oeste caixa))
-    | podeAndar (x-1,y) caixa mapa && not caixa = (Jogo mapa (Jogador (x-1,y) Oeste caixa)) 
-    | podeTrepar (x-1,y) caixa mapa = (trepa (Jogador (x,y) Oeste caixa) mapa)
+    | podeAndar (x-1,y) caixa mapa && caixa = (Jogo (moveObjeto mapa Caixa (x,y-1) (calculaQuedaCaixa (x-1,y) mapa)) (Jogador (calculaQueda (x-1,y) mapa) Oeste True))
+    | podeAndar (x-1,y) caixa mapa && not caixa = (Jogo mapa (Jogador (calculaQueda (x-1,y) mapa) Oeste False)) 
     | otherwise = (Jogo mapa (Jogador (x,y) Oeste caixa))
 
 {-andarDireita é o movimento para a direita do jogador, seja andar uma unidade ou virar-se-}
 andarDireita :: Jogo -> Jogo
 andarDireita (Jogo mapa (Jogador (x,y) dir caixa))
-    | podeAndar (x+1,y) caixa mapa && caixa = (Jogo (moveObjeto mapa Caixa (x,y-1) (x+1,y-1)) (Jogador (x+1,y) Este caixa))
-    | podeAndar (x+1,y) caixa mapa && not caixa = (Jogo mapa (Jogador (x+1,y) Este caixa)) 
-    | podeTrepar (x+1,y) caixa mapa = (trepa (Jogador (x,y) Este caixa) mapa)
+    | podeAndar (x+1,y) caixa mapa && caixa = (Jogo (moveObjeto mapa Caixa (x,y-1) (calculaQuedaCaixa (x+1,y) mapa)) (Jogador (calculaQueda (x+1,y) mapa) Este True))
+    | podeAndar (x+1,y) caixa mapa && not caixa = (Jogo mapa (Jogador (calculaQueda (x+1,y) mapa) Este False)) 
     | otherwise = (Jogo mapa (Jogador (x,y) Este caixa))
 
 {-podeAndar considera as várias possibilidades de movimento do jogador-}
@@ -50,13 +49,11 @@ podeAndar (x,y) caixa mapa
 
 {-1.2 trepar-}
 trepar :: Jogo -> Jogo
-trepar (Jogo mapa jogador)
-    | podeTrepar (getCoordenadasJogador jogador) (temCaixa jogador) mapa = trepa jogador mapa
-    | otherwise = (Jogo mapa jogador)  
+trepar (Jogo mapa (Jogador (x,y) dir caixa))
+    | dir == Este && podeTrepar (x+1,y) caixa mapa = trepa (Jogador (x,y) Este caixa) mapa
+    | dir == Oeste && podeTrepar (x-1,y) caixa mapa = trepa (Jogador (x,y) Oeste caixa) mapa
+    | otherwise = (Jogo mapa (Jogador (x,y) dir caixa))  
 
-{-devolve as coordenadas do jogador-}
-getCoordenadasJogador :: Jogador -> Coordenadas
-getCoordenadasJogador (Jogador (x,y) dir caixa) = (x,y)
 
 {-trepa faz com que o jogador trepe de acordo com as circunstâncias (direção e mapa-}
 trepa :: Jogador -> Mapa -> Jogo
@@ -74,17 +71,15 @@ podeTrepar (x,y) caixa mapa
     | ((mapa!!y!!x == Caixa || mapa!!y!!x == Bloco) 
     && (mapa!!(y-1)!!x == Vazio) 
     && (not caixa || (caixa && (mapa!!(y-2)!!x == Vazio)))) = True 
+    |otherwise = False
 
 
 {-1.3. interageCaixa faz com que o jogador tente interagir com uma caixa, pegando ou largando-}
 interageCaixa :: Jogo -> Jogo
-interageCaixa (Jogo mapa jogador)
-    | temCaixa jogador = (Jogo (largaCaixa jogador mapa) jogador)
-    | otherwise = (Jogo (pegaCaixa jogador  mapa) jogador) 
+interageCaixa (Jogo mapa (Jogador (x,y) dir caixa))
+    | caixa = (Jogo (largaCaixa (Jogador (x,y) dir caixa) mapa) (Jogador (x,y) dir False))
+    | otherwise = (Jogo (pegaCaixa (Jogador (x,y) dir caixa)  mapa) (Jogador (x,y) dir True)) 
 
-{-temCaixa diz se o jogador possui uma caixa ou não-}
-temCaixa :: Jogador -> Bool
-temCaixa (Jogador (x,y) dir caixa) = caixa 
 
 {-podePegar verifica se o jogador pode pegar uma caixa-}
 podePegar :: Direcao -> Coordenadas -> Mapa -> Bool
@@ -110,10 +105,11 @@ moveObjeto mapa peca (x1,y1) (x2,y2) = subLinha (subLinha mapa (Vazio, (x1,y1)))
 pegaCaixa :: Jogador -> Mapa -> Mapa
 pegaCaixa (Jogador (x,y) dir caixa) mapa 
     | caixa = mapa 
-    | podePegar dir ((x-1),y) mapa = moveObjeto mapa Caixa ((x -1),y) (x,(y -1)) --Oeste, caixa no chão
-    | podePegar dir ((x-1),y-1) mapa = moveObjeto mapa Caixa ((x-1),(y-1)) (x,(y-1)) --Oeste, caixa em cima de algo
-    | podePegar dir ((x+1),y) mapa = moveObjeto mapa Caixa ((x+1),y) (x,(y-1)) --Este, caixa no chão
-    | podePegar dir ((x+1),y) mapa = moveObjeto mapa Caixa ((x+1),(y-1)) (x,(y-1)) --Este, caixa em cima de algo
+    | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x -1),y) (x,(y -1)) --Oeste, caixa no chão
+    | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x-1),(y-1)) (x,(y-1)) --Oeste, caixa em cima de algo
+    | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x+1),y) (x,(y-1)) --Este, caixa no chão
+    | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x+1),(y-1)) (x,(y-1)) --Este, caixa em cima de algo
+    | otherwise = mapa
 
 {-largaCaixa larga uma caixa se possível-}
 largaCaixa :: Jogador -> Mapa -> Mapa
@@ -130,6 +126,14 @@ calculaQueda (x,y) mapa
     | y == (length mapa)-1 = (x,y)
     | mapa!!y!!x == Vazio = calculaQueda (x,y+1) mapa  
     
+
+calculaQuedaCaixa :: Coordenadas -> Mapa -> Coordenadas 
+calculaQuedaCaixa (x,y) [] = (x,y)
+calculaQuedaCaixa (x,y) mapa 
+    | ((mapa!!y!!x == Bloco) || (mapa!!y!!x == Caixa)) = (x,y-2) 
+    | y == (length mapa)-1 = (x,y-1)
+    | mapa!!y!!x == Vazio = calculaQuedaCaixa (x,y+1) mapa  
+
 {-2.-}
 correrMovimentos :: Jogo -> [Movimento] -> Jogo
 correrMovimentos (Jogo mapa jogador) [] = (Jogo mapa jogador)
