@@ -16,7 +16,7 @@ import Control.Lens
 {-constroiMapa preenche o mapa de Vazios com as peças dadas nas coordenadas correspondentes-}
 constroiMapa :: [(Peca, Coordenadas)] -> Mapa
 constroiMapa [] = [] 
-constroiMapa l@((p, (x,y)):t) 
+constroiMapa ((p, (x,y)):t) 
     | t == [] = subLinha (mapaVazios x y) (p, (x,y))
     | otherwise = subLinha (constroiMapa t) (p, (x,y))
 
