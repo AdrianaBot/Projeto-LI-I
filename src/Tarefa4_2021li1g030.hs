@@ -78,6 +78,8 @@ podeTrepar (x,y) caixa mapa
 interageCaixa :: Jogo -> Jogo
 interageCaixa (Jogo mapa (Jogador (x,y) dir caixa))
     | caixa = (Jogo (largaCaixa (Jogador (x,y) dir caixa) mapa) (Jogador (x,y) dir False))
+    {-| podePegar dir (x,y) mapa = (Jogo (pegaCaixa (Jogador (x,y) dir caixa) mapa) (Jogador (x,y) dir True))
+    | podePegar dir (x,y-1) mapa = (Jogo (pegaCaixa (Jogador (x,y) dir caixa) mapa) (Jogador (x,y) dir True))-}
     | otherwise = (Jogo (pegaCaixa (Jogador (x,y) dir caixa)  mapa) (Jogador (x,y) dir True)) 
 
 
@@ -97,7 +99,7 @@ podeLargar dir (x,y) mapa
     | dir == Oeste = x > 0 && x<= (length (mapa!!0))-1 && y > 0 && (mapa!!(y-1)!!(x-1) == Vazio)
     | otherwise = False 
 
-{-moveCaixa indica o movimento da caixa-}
+{-moveObjeto move o objeto-}
 moveObjeto :: Mapa -> Peca -> Coordenadas -> Coordenadas -> Mapa 
 moveObjeto mapa peca (x1,y1) (x2,y2) = subLinha (subLinha mapa (Vazio, (x1,y1))) (peca, (x2,y2))
 
@@ -105,7 +107,7 @@ moveObjeto mapa peca (x1,y1) (x2,y2) = subLinha (subLinha mapa (Vazio, (x1,y1)))
 pegaCaixa :: Jogador -> Mapa -> Mapa
 pegaCaixa (Jogador (x,y) dir caixa) mapa 
     | caixa = mapa 
-    | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x -1),y) (x,(y -1)) --Oeste, caixa no chão
+    | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x-1),y) (x,(y-1)) --Oeste, caixa no chão
     | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x-1),(y-1)) (x,(y-1)) --Oeste, caixa em cima de algo
     | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x+1),y) (x,(y-1)) --Este, caixa no chão
     | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x+1),(y-1)) (x,(y-1)) --Este, caixa em cima de algo
