@@ -62,6 +62,7 @@ porta ((p,(x,y)):t) = if p == Porta then semPortas t
         | p == Porta = False
         | otherwise = semPortas t
 
+
 {-3.
  |caixaSegura : Corre as funções auxiliares que premitiram saber se não há caixas a flutuar
     listaCaixas: Cria uma lista (apartir da lista principal) só com as peças que são caixas
