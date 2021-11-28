@@ -20,7 +20,8 @@ instance Show Jogo where
   
     where fazString :: [String] -> String
           fazString [] = ""
-          fazString (h:t) = (show h) ++ "\n" ++ (fazString t) 
+          fazString [h] = h
+          fazString (h:t) = h ++ "\n" ++ (fazString t)
          
 {- |
 escrevePeca : Dada uma determinada Peca, representa-a em forma de String

@@ -14,10 +14,10 @@ import LI12122
 validaPotencialMapa :: [(Peca, Coordenadas)] -> Bool
 validaPotencialMapa [] = False
 validaPotencialMapa [(a,(x,y))] = False
-validaPotencialMapa l = if (lugarDif l && porta l && caixaSegura l && vazio l && chao l) then True else False
+validaPotencialMapa l = lugarDif l && porta l && caixaSegura l && vazio l && chao l
 
---1.
-{-|coordenadas : Verifica se as coordenadas de uma lista estão bem definidas, ou seja, maiores do que zero
+{-1.
+ |coordenadas : Verifica se as coordenadas de uma lista estão bem definidas, ou seja, maiores do que zero
    lugarDif: Verfica se a função coordenadas é verdade, se sim executa lugarDif'
     lugarDif': Verifica se as Peças de uma lista estão em lugares difrentes
     pertence : Verifica se uma dada coordenada aparece em algum ponto numa lista de Peças e coordenadas-}
@@ -46,10 +46,9 @@ lugarDif ((p,(x,y)):t) = if coordenadas ((p,(x,y)):t) then lugarDif' ((p,(x,y)):
                         else False
 
 
---2.
-
-{-|porta : verifica se existe, pelo menos, uma porta na lista
-    --semPortas : verifica se não existe mais do que uma porta na lista-}
+{-2.
+ |porta : verifica se existe, pelo menos, uma porta na lista
+    semPortas : verifica se não existe mais do que uma porta na lista-}
 
 
 porta :: [(Peca, Coordenadas)] -> Bool
@@ -63,9 +62,8 @@ porta ((p,(x,y)):t) = if p == Porta then semPortas t
         | p == Porta = False
         | otherwise = semPortas t
 
---3.
-
-{-|caixaSegura : Corre as funções auxiliares que premitiram saber se não há caixas a flutuar
+{-3.
+ |caixaSegura : Corre as funções auxiliares que premitiram saber se não há caixas a flutuar
     listaCaixas: Cria uma lista (apartir da lista principal) só com as peças que são caixas
     caixaSeguraM : Compara as coordenadas da 'listaCaixas' com as da lista original
     caixaSeguara2 : Verifica se na coordenada inferiror a uma caixa existe outra caixa ou bloco-}
@@ -91,9 +89,8 @@ caixaSegura :: [(Peca, Coordenadas)] -> Bool
 caixaSegura [] = False
 caixaSegura mapa = caixaSeguraM (listaCaixas mapa) mapa 
 
---4.
-
-{-|vazio : Verifica se a lista tem uma peça vazia ou se a area da lista é diferente do número de peças presentes na lista (o que inderetamente significa que existem peças vazias)
+{-4.
+ |vazio : Verifica se a lista tem uma peça vazia ou se a area da lista é diferente do número de peças presentes na lista (o que inderetamente significa que existem peças vazias)
    area : Calcula a area de uma lista de peças
    maiorX : Verifica se as coordenadas da lista estão corretas
      procurarX : Procura na lista o elemente com maior X
@@ -142,9 +139,8 @@ vazio l
  | length l < area l || ePeca Vazio l = True
  | otherwise = False
 
---5.
-
-{-|chao : Executa as funções auxiliares que vão derterminar se existe chão no mapa fornecido
+{-5.
+ |chao : Executa as funções auxiliares que vão derterminar se existe chão no mapa fornecido
     existe : Verifica se um par cosntituido por uma dada peça e coordenada existe no mapa fornecido
     proximo : Verifica se na abcissa ao lado do Bloco na posião (0, maiorY l) exite um outro Bloco, e continua assim até ao ponto com a maior abcissa.-}
 
