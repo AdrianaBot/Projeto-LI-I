@@ -10,6 +10,8 @@ module Tarefa1_2021li1g030 where
 
 import LI12122
 
+{-| validaPotencialMapa : Corre todas as funções descritas. Se todas forem verdadeiras, então, a função também o é.
+  O que quer dizer que o mapa fornecido, está bem definido-}
 
 validaPotencialMapa :: [(Peca, Coordenadas)] -> Bool
 validaPotencialMapa [] = False
