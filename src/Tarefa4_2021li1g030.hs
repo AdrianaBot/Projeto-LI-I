@@ -78,8 +78,8 @@ podeTrepar (x,y) caixa mapa
 interageCaixa :: Jogo -> Jogo
 interageCaixa (Jogo mapa (Jogador (x,y) dir caixa))
     | caixa = (Jogo (largaCaixa (Jogador (x,y) dir caixa) mapa) (Jogador (x,y) dir False))
-    {-| podePegar dir (x,y) mapa = (Jogo (pegaCaixa (Jogador (x,y) dir caixa) mapa) (Jogador (x,y) dir True))
-    | podePegar dir (x,y-1) mapa = (Jogo (pegaCaixa (Jogador (x,y) dir caixa) mapa) (Jogador (x,y) dir True))-}
+    | podePegar dir (x,y) mapa = (Jogo (pegaCaixa (Jogador (x,y) dir caixa) mapa) (Jogador (x,y) dir True))
+    | podePegar dir (x,y-1) mapa = (Jogo (pegaCaixa (Jogador (x,y) dir caixa) mapa) (Jogador (x,y) dir True))
     | otherwise = (Jogo (pegaCaixa (Jogador (x,y) dir caixa)  mapa) (Jogador (x,y) dir True)) 
 
 
@@ -87,9 +87,10 @@ interageCaixa (Jogo mapa (Jogador (x,y) dir caixa))
 podePegar :: Direcao -> Coordenadas -> Mapa -> Bool
 podePegar dir (x,y) [] = False 
 podePegar dir (x,y) mapa
-    | dir == Este = x >= 0 && x <= (length (mapa!!0))-2 && y > 0 && (mapa!!(y-1)!!x == Vazio) && (mapa!!y!!(x+1) == Caixa) && (mapa!!(y-1)!!(x+1) == Vazio)
-    | dir == Oeste = x > 0 && x <= (length (mapa!!0))-1 && y > 0 && (mapa!!(y-1)!!x == Vazio) && (mapa!!y!!(x-1) == Caixa) && (mapa!!(y-1)!!(x-1) == Vazio)
+    | dir == Este = x >= 0 && x <= (length (mapa!!0))-2 && y > 0 && (mapa!!(y-1)!!x == Vazio) && (mapa!!y!!(x+1) == Caixa) && mapa!!(y-1)!!(x+1) == Vazio
+    | dir == Oeste = x > 0 && x <= (length (mapa!!0))-1 && y > 0 && (mapa!!(y-1)!!x == Vazio) && (mapa!!y!!(x-1) == Caixa) && mapa!!(y-1)!!(x-1) == Vazio
     | otherwise = False 
+
 
 {-podeLargar verifica se o jogador pode largar uma caixa-}
 podeLargar :: Direcao -> Coordenadas -> Mapa -> Bool
@@ -103,7 +104,7 @@ podeLargar dir (x,y) mapa
 moveObjeto :: Mapa -> Peca -> Coordenadas -> Coordenadas -> Mapa 
 moveObjeto mapa peca (x1,y1) (x2,y2) = subLinha (subLinha mapa (Vazio, (x1,y1))) (peca, (x2,y2))
 
-{-pegaCaixa pega numa caixa se for possível-}
+{-pegaCaixa pega numa caixa, se for possível-}
 pegaCaixa :: Jogador -> Mapa -> Mapa
 pegaCaixa (Jogador (x,y) dir caixa) mapa 
     | caixa = mapa 
@@ -113,11 +114,11 @@ pegaCaixa (Jogador (x,y) dir caixa) mapa
     | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x+1),(y-1)) (x,(y-1)) --Este, caixa em cima de algo
     | otherwise = mapa
 
-{-largaCaixa larga uma caixa se possível-}
+{-largaCaixa larga uma caixa, se possível-}
 largaCaixa :: Jogador -> Mapa -> Mapa
 largaCaixa (Jogador (x,y) dir caixa) mapa 
-    | dir == Este && (podeLargar dir (x,y) mapa) = moveObjeto mapa Caixa (x,y-1) (calculaQueda (x + 1, y - 1) mapa)
-    | dir == Oeste && (podeLargar dir (x,y) mapa) = moveObjeto mapa Caixa (x,y-1) (calculaQueda (x-1, y-1) mapa) 
+    | dir == Este && (podeLargar dir (x,y) mapa) = moveObjeto mapa Caixa (x,y-1) (calculaQueda (x + 1, y) mapa)
+    | dir == Oeste && (podeLargar dir (x,y) mapa) = moveObjeto mapa Caixa (x,y-1) (calculaQporueda (x-1, y) mapa) 
     | otherwise =  mapa
 
 {-calculaQueda calcula a queda de qualquer objeto-}
