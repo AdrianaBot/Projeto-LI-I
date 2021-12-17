@@ -118,7 +118,7 @@ pegaCaixa (Jogador (x,y) dir caixa) mapa
 largaCaixa :: Jogador -> Mapa -> Mapa
 largaCaixa (Jogador (x,y) dir caixa) mapa 
     | dir == Este && (podeLargar dir (x,y) mapa) = moveObjeto mapa Caixa (x,y-1) (calculaQueda (x + 1, y) mapa)
-    | dir == Oeste && (podeLargar dir (x,y) mapa) = moveObjeto mapa Caixa (x,y-1) (calculaQporueda (x-1, y) mapa) 
+    | dir == Oeste && (podeLargar dir (x,y) mapa) = moveObjeto mapa Caixa (x,y-1) (calculaQueda (x-1, y) mapa) 
     | otherwise =  mapa
 
 {-calculaQueda calcula a queda de qualquer objeto-}
