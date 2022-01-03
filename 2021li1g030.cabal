@@ -13,6 +13,7 @@ library
         src
     build-depends:
         base ^>=4.15.0.0
+        , lens
         , gloss
     default-language: Haskell2010
 

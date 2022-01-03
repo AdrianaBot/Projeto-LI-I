@@ -1,0 +1,88 @@
+2021li1g030-0.1.0.0: unregistering (local file changes: 2021li1g030.cabal src/LI12122.hs src/Tarefa1_2021li1g030.hs src/Tarefa2_2021li1g030.hs src/Tarefa...)
+2021li1g030> configure (lib)
+Configuring 2021li1g030-0.1.0.0...
+2021li1g030> build (lib)
+Preprocessing library for 2021li1g030-0.1.0.0..
+Building library for 2021li1g030-0.1.0.0..
+[1 of 5] Compiling LI12122
+[2 of 5] Compiling Tarefa1_2021li1g030
+[3 of 5] Compiling Tarefa2_2021li1g030
+[4 of 5] Compiling Tarefa3_2021li1g030
+[5 of 5] Compiling Tarefa4_2021li1g030
+
+/home/nelson/Documents/LI1/projectos/2021li1g030/src/Tarefa4_2021li1g030.hs:111:7: warning: [-Woverlapping-patterns]
+    Pattern match is redundant
+    In an equation for ‘pegaCaixa’:
+        pegaCaixa (Jogador (x, y) dir caixa) mapa | podePegar
+                                                      dir (x, y) mapa = ...
+    |
+111 |     | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x-1),(y-1)) (x,(y-1)) --Oeste, caixa em cima de algo
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^
+
+/home/nelson/Documents/LI1/projectos/2021li1g030/src/Tarefa4_2021li1g030.hs:112:7: warning: [-Woverlapping-patterns]
+    Pattern match is redundant
+    In an equation for ‘pegaCaixa’:
+        pegaCaixa (Jogador (x, y) dir caixa) mapa | podePegar
+                                                      dir (x, y) mapa = ...
+    |
+112 |     | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x+1),y) (x,(y-1)) --Este, caixa no chão
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^
+
+/home/nelson/Documents/LI1/projectos/2021li1g030/src/Tarefa4_2021li1g030.hs:113:7: warning: [-Woverlapping-patterns]
+    Pattern match is redundant
+    In an equation for ‘pegaCaixa’:
+        pegaCaixa (Jogador (x, y) dir caixa) mapa | podePegar
+                                                      dir (x, y) mapa = ...
+    |
+113 |     | podePegar dir (x,y) mapa = moveObjeto mapa Caixa ((x+1),(y-1)) (x,(y-1)) --Este, caixa em cima de algo
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^
+2021li1g030> haddock
+Preprocessing library for 2021li1g030-0.1.0.0..
+Running Haddock on library for 2021li1g030-0.1.0.0..
+Haddock coverage:
+  92% ( 11 / 12) in 'LI12122'
+  Missing documentation for:
+    Mapa (src/LI12122.hs:28)
+  95% ( 19 / 20) in 'Tarefa1_2021li1g030'
+  Missing documentation for:
+    caixaSegiraM (src/Tarefa1_2021li1g030.hs:99)
+  12% (  1 /  8) in 'Tarefa2_2021li1g030'
+  Missing documentation for:
+    constroiMapa (src/Tarefa2_2021li1g030.hs:17)
+    mapaVazios (src/Tarefa2_2021li1g030.hs:25)
+    subPeca (src/Tarefa2_2021li1g030.hs:29)
+    subLinha (src/Tarefa2_2021li1g030.hs:35)
+    desconstroiMapa (src/Tarefa2_2021li1g030.hs:43)
+    desconstroiLinhas (src/Tarefa2_2021li1g030.hs:48)
+    desconstroiColunas (src/Tarefa2_2021li1g030.hs:55)
+ 100% (  8 /  8) in 'Tarefa3_2021li1g030'
+   6% (  1 / 17) in 'Tarefa4_2021li1g030'
+  Missing documentation for:
+    moveJogador (src/Tarefa4_2021li1g030.hs:18)
+    andarEsquerda (src/Tarefa4_2021li1g030.hs:27)
+    andarDireita (src/Tarefa4_2021li1g030.hs:34)
+    podeAndar (src/Tarefa4_2021li1g030.hs:41)
+    trepar (src/Tarefa4_2021li1g030.hs:51)
+    trepa (src/Tarefa4_2021li1g030.hs:59)
+    podeTrepar (src/Tarefa4_2021li1g030.hs:68)
+    interageCaixa (src/Tarefa4_2021li1g030.hs:78)
+    podePegar (src/Tarefa4_2021li1g030.hs:87)
+    podeLargar (src/Tarefa4_2021li1g030.hs:95)
+    moveObjeto (src/Tarefa4_2021li1g030.hs:103)
+    pegaCaixa (src/Tarefa4_2021li1g030.hs:107)
+    largaCaixa (src/Tarefa4_2021li1g030.hs:117)
+    calculaQueda (src/Tarefa4_2021li1g030.hs:124)
+    calculaQuedaCaixa (src/Tarefa4_2021li1g030.hs:132)
+    correrMovimentos (src/Tarefa4_2021li1g030.hs:140)
+Documentation created:
+.stack-work/dist/x86_64-linux-tinfo6/Cabal-3.4.0.0/doc/html/2021li1g030/index.html,
+.stack-work/dist/x86_64-linux-tinfo6/Cabal-3.4.0.0/doc/html/2021li1g030/2021li1g030.txt
+2021li1g030> copy/register
+Installing library in /home/nelson/Documents/LI1/projectos/2021li1g030/.stack-work/install/x86_64-linux-tinfo6/e619e721cfd93d212e783f07e0e112de47ec2ce9746d976e44e04c843f2a0455/9.0.1/lib/x86_64-linux-ghc-9.0.1/2021li1g030-0.1.0.0-4Yx1zzgj7s5KTTGNnGkR2M
+Registering library for 2021li1g030-0.1.0.0..
+Updating Haddock index for local packages in
+/home/nelson/Documents/LI1/projectos/2021li1g030/.stack-work/install/x86_64-linux-tinfo6/e619e721cfd93d212e783f07e0e112de47ec2ce9746d976e44e04c843f2a0455/9.0.1/doc/index.html
+Updating Haddock index for local packages and dependencies in
+/home/nelson/Documents/LI1/projectos/2021li1g030/.stack-work/install/x86_64-linux-tinfo6/e619e721cfd93d212e783f07e0e112de47ec2ce9746d976e44e04c843f2a0455/9.0.1/doc/all/index.html
+Haddock index for snapshot packages already up to date at:
+/home/nelson/.stack/snapshots/x86_64-linux-tinfo6/e619e721cfd93d212e783f07e0e112de47ec2ce9746d976e44e04c843f2a0455/9.0.1/doc/index.html

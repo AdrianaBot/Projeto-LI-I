@@ -1,0 +1,183 @@
+### Failure in: 0:1:Movimento Trepar no Jogo 02
+tests/Fase1.hs:34
+expected:        
+    C X
+    < X
+P X C X
+XXXXXXX
+ but got:        
+    C X
+    < X
+P X C X
+XXXXXXX
+### Failure in: 0:8:Movimento Trepar para Oeste para cima de Caixa com Caixa
+tests/Fase1.hs:34
+expected:        
+    C X
+    < X
+P X C X
+XXXXXXX
+ but got:        
+    C X
+    < X
+P X C X
+XXXXXXX
+### Failure in: 0:9:Movimento Trepar para Este para cima de Caixa com Caixa
+tests/Fase1.hs:34
+expected:        
+    C X
+    > X
+P X C X
+XXXXXXX
+ but got:        
+    C X
+    > X
+P X C X
+XXXXXXX
+### Failure in: 0:15:Movimento AndarEsquerda para cima caixa com caixa
+tests/Fase1.hs:34
+expected: X                  X
+X                  X
+X                  X
+X                  X
+X                  X
+X   X      CX      X
+XP  X   X C<X  C   X
+XXXXXXXXXXXXXXXXXXXX
+ but got: X                  X
+X                  X
+X                  X
+X                  X
+X                  X
+X   X      CX      X
+XP  X   X C<X  C   X
+XXXXXXXXXXXXXXXXXXXX
+### Failure in: 0:20:Movimento AndarDireita descer de Caixa com Caixa
+tests/Fase1.hs:34
+expected:        
+      X
+  X C X
+P XC> X
+XXXXXXX
+ but got:        
+      X
+  X C X
+P XC> X
+XXXXXXX
+### Failure in: 0:24:Movimento tenta largar caixa Oeste
+tests/Fase1.hs:34
+expected:        
+      X
+  X   X
+P X<  X
+XXXXXXX
+ but got:        
+      X
+  XC  X
+P X<  X
+XXXXXXX
+### Failure in: 0:25:Movimento tenta pegar Caixa Este
+tests/Fase1.hs:34
+expected:        
+      X
+  X C X
+P X < X
+XXXXXXX
+ but got:        
+      X
+  X   X
+P X < X
+XXXXXXX
+### Failure in: 0:26:Movimento levanta Caixa
+tests/Fase1.hs:34
+expected:        
+      X
+  X C X
+P X < X
+XXXXXXX
+ but got:        
+      X
+  X   X
+P X < X
+XXXXXXX
+### Failure in: 0:27:Movimento levanta Caixa
+tests/Fase1.hs:34
+expected:  C X  
+ >C   
+XXXXXX
+ but got:  C X  
+P>    
+XXXXXX
+### Failure in: 0:28:Movimento tenta levantar Caixa
+tests/Fase1.hs:34
+expected:    XC 
+P C > 
+XXXXXX
+ but got:    X  
+P C > 
+XXXXXX
+### Failure in: 0:31:Movimento tenta largar Caixa
+tests/Fase1.hs:34
+expected:        
+  X   X
+      X
+P X  >X
+XXXXXXX
+ but got:        
+  X   X
+     CX
+P X  >X
+XXXXXXX
+### Error in:   0:32:Movimento tenta largar Caixa em cima de Porta Oeste
+src/Tarefa4_2021li1g030.hs:(125,1)-(129,53): Non-exhaustive patterns in function calculaQueda
+
+### Error in:   0:33:Movimento tenta largar Caixa em cima de Porta Este
+src/Tarefa4_2021li1g030.hs:(125,1)-(129,53): Non-exhaustive patterns in function calculaQueda
+
+### Error in:   0:34:Movimento largar Caixa para baixo de Porta
+src/Tarefa4_2021li1g030.hs:(125,1)-(129,53): Non-exhaustive patterns in function calculaQueda
+
+### Failure in: 0:35:Movimento tenta levantar Caixa bloqueada por bloco
+tests/Fase1.hs:34
+expected:   XC  
+P C<  
+XXXXXX
+ but got:   X   
+P C<  
+XXXXXX
+### Failure in: 0:36:Movimento levanta Caixa
+tests/Fase1.hs:34
+expected:        
+      X
+P    CX
+  X  <X
+XXXXXXX
+ but got:        
+      X
+P    CX
+  X  <X
+XXXXXXX
+### Error in:   0:37:Resolve Jogo 01
+src/Tarefa4_2021li1g030.hs:(125,1)-(129,53): Non-exhaustive patterns in function calculaQueda
+
+### Failure in: 0:38:Resolve Jogo 07
+tests/Fase1.hs:34
+expected:        
+      X
+PC    X
+ <X C X
+XXXXXXX
+ but got:        
+      X
+<     X
+C X C X
+XXXXXXX
+### Error in:   0:39:Resolve Jogo 03
+src/Tarefa4_2021li1g030.hs:(125,1)-(129,53): Non-exhaustive patterns in function calculaQueda
+
+### Error in:   0:40:Passear no Jogo 09
+src/Tarefa4_2021li1g030.hs:(125,1)-(129,53): Non-exhaustive patterns in function calculaQueda
+
+CallStack (from HasCallStack):
+  error, called at tests/Fase1.hs:27:29 in main:Main
+Cases: 41  Tried: 41  Errors: 6  Failures: 14
