@@ -18,7 +18,7 @@ Módulo para a realização da Tarefa 5 do projeto de LI1 em 2021/22.
   . https://hackage.haskell.org/package/gloss-1.1.1.0/docs/Graphics-Gloss-Game.html
 -}
 
-module Tarefa5_2021li1g030 where
+module Main where
 import LI12122
 import Mapas
 import Tarefa3_2021li1g030
@@ -61,7 +61,6 @@ type GameWorld = (Menu, Coordenadas, Int, (Jogo, (Picture, Picture, Picture, Pic
 
 levels :: [Jogo]
 levels = [m1,m2,m3,m4,m5,m6,m7]
-
 
 
 
