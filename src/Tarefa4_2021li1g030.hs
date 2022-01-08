@@ -25,9 +25,9 @@ moveJogador (Jogo mapa jogador) movimento
 {-1.1. AndarEsquerda/AndarDireita-}
 {-andarEsquerda é o movimento para a esquerda do jogador, seja ele andar uma unidade ou virar-se-}
 andarEsquerda :: Jogo -> Jogo
-andarEsquerda (Jogo mapa (Jogador (x,y) dir caixa)) 
+andarEsquerda (Jogo mapa (Jogador (x,y) dir caixa))
     | podeAndar (x-1,y) caixa mapa && caixa = (Jogo (moveObjeto mapa Caixa (x,y-1) (calculaQuedaCaixa (x-1,y) mapa)) (Jogador (calculaQueda (x-1,y) mapa) Oeste True))
-    | podeAndar (x-1,y) caixa mapa && not caixa = (Jogo mapa (Jogador (calculaQueda (x-1,y) mapa) Oeste False)) 
+    | podeAndar (x-1,y) caixa mapa && not caixa = (Jogo mapa (Jogador (calculaQueda (x-1,y) mapa) Oeste False))  
     | otherwise = (Jogo mapa (Jogador (x,y) Oeste caixa))
 
 {-andarDireita é o movimento para a direita do jogador, seja andar uma unidade ou virar-se-}
