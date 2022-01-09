@@ -21,10 +21,10 @@ No entanto, através do nosso método (brute force), os quatro movimentos multip
 
 
 {-resolveJogo é a função final desta tarefa, que permite a resolução do mapa no menor número de passos/movimentos possíveis-}
-resolveJogo :: Int -> Jogo -> Maybe [Movimento]
+{-resolveJogo :: Int -> Jogo -> Maybe [Movimento]
 resolveJogo i jogo 
     | i < 0 = Nothing --não há solução
-    | procuraSequencia jogo = Just 
+    | procuraSequencia jogo = Just -}}
 
 
 {-A procuraPorta encontra a porta no jogo, de forma a possibilitar a resolução do jogo na procuraSequencia-}
